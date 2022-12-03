@@ -1,11 +1,12 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import DefaultLayout from '@/layouts/DefaultLayout'
 
 const routes = [
   {
     path: '/',
-    name: 'home',
-    component: HomeView
+    name: 'Home',
+    component: () => import('@/views/HomeView.vue'),
+    meta: { layout: DefaultLayout }
   },
   {
     path: '/about',
