@@ -43,6 +43,7 @@ const showMenu = computed(() => store.getters.getMenuState)
   width: 100%;
   height: 60px;
   position: fixed;
+  z-index: 100;
 }
 
 .layout__content {
@@ -50,9 +51,15 @@ const showMenu = computed(() => store.getters.getMenuState)
   flex-grow: 1;
 
   width: 100%;
-  height: 100%;
+  min-height: 100vh;
+
+  display: flex;
+  justify-content: center;
+
   position: relative;
-  margin-top: calc(60px + 15px);
+  
+  margin-top: 60px;
+  padding-top: 15px;
 
   background: var(--gray-light);
 }
@@ -61,8 +68,8 @@ const showMenu = computed(() => store.getters.getMenuState)
   width: 100%;
   max-width: calc(200px + 10px);
   height: 100%;
-  position: fixed;
-  top: calc(60px + 15px);
+  position: absolute;
+  top: 15px;
   left: 0;
   transform: translateX(-100%);
   transition: transform 0.3s;
@@ -73,11 +80,6 @@ const showMenu = computed(() => store.getters.getMenuState)
   }
 }
 
-.layout__content {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
 .layout__main {
   background: rgba(yellow, .4);
   width: 100%;

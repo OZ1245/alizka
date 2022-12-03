@@ -1,52 +1,34 @@
 <template>
   <component 
     :is="iconComponent" 
-    :width="size"
-    :height="size"
-    :viewBox="`0 0 ${size} ${size}`"
+    :width="props.size"
+    :height="props.size"
+    :viewBox="`0 0 ${props.size} ${props.size}`"
     :fill="color"
   ></component>
 </template>
 
-<script>
-import BurgerIcon from './BurgerIcon'
-import SearchIcon from './SearchIcon'
-import BellIcon from './BellIcon'
-import DollarIcon from './DollarIcon'
-import UserIcon from './UserIcon'
+<script setup>
+import { defineProps, computed, defineAsyncComponent } from 'vue'
 
-export default {
-  name: 'Icon',
-
-  components: {
-    BurgerIcon,
-    SearchIcon,
-    BellIcon,
-    DollarIcon,
-    UserIcon
+const props = defineProps({
+  iconName: {
+    type: String,
+    required: true,
   },
-
-  props: {
-    iconName: {
-      type: String,
-      required: true,
-    },
-    color: {
-      type: String,
-      required: false,
-      default: 'currentColor'
-    },
-    size: {
-      type: [ Number, String ],
-      required: false,
-      default: 20
-    }
+  color: {
+    type: String,
+    required: false,
+    default: 'currentColor'
   },
-
-  computed: {
-    iconComponent() {
-      return `${this.iconName}Icon`
-    }
+  size: {
+    type: [ Number, String ],
+    required: false,
+    default: 20
   }
-}
+})
+
+const iconComponent = computed(() => (
+  defineAsyncComponent(() => import(`./${props.iconName}Icon.vue`))
+))
 </script>
