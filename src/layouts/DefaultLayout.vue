@@ -53,12 +53,13 @@ const showMenu = computed(() => store.getters.getMenuState)
   height: 100%;
   position: relative;
   margin-top: calc(60px + 15px);
+
+  background: var(--gray-light);
 }
 
 .layout__aside {
-  background: rgba(gray, .4);
   width: 100%;
-  max-width: 227px;
+  max-width: calc(200px + 10px);
   height: 100%;
   position: fixed;
   top: calc(60px + 15px);

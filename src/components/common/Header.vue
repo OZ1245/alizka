@@ -10,11 +10,11 @@
         @click="toggleMenu"
       ></TheButtonIcon>
 
-      <router-link :to="{ name: 'Home' }">
+      <RouterLink :to="{ name: 'Home' }">
         <figure class="header__logo">
           <img src="/images/logo.png" alt="Alizka" title="На главную" />
         </figure>
-      </router-link>
+      </RouterLink>
 
       <GlobalSearch></GlobalSearch>
     </div>

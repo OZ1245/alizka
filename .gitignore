@@ -2,6 +2,7 @@
 node_modules
 /dist
 .history
+.history_
 
 
 # local env files
@@ -23,3 +24,4 @@ pnpm-debug.log*
 *.sln
 *.sw?
 *.code-workspace
+*.code-workspace_
