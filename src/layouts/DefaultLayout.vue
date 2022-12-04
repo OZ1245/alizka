@@ -3,12 +3,14 @@
     <Header class="layout__header"></Header>
 
     <div class="layout__content">
-      <Aside 
+      <div 
         :class="[
           'layout__aside',
           { 'layout__aside--show': showMenu }
         ]"
-      ></Aside>
+      >
+        <Aside></Aside>
+      </div>
 
       <main class="layout__main">
         <slot></slot>
@@ -66,10 +68,10 @@ const showMenu = computed(() => store.getters.getMenuState)
 
 .layout__aside {
   width: 100%;
-  max-width: calc(200px + 10px);
+  max-width: calc(200px + 10px + 10px);
   height: 100%;
-  position: absolute;
-  top: 15px;
+  position: fixed;
+  top: 0;
   left: 0;
   transform: translateX(-100%);
   transition: transform 0.3s;
