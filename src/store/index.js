@@ -1,4 +1,5 @@
 import { createStore } from 'vuex'
+import './modules/posts.js'
 
 export default createStore({
   state: {

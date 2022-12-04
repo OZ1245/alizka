@@ -83,7 +83,6 @@ const showMenu = computed(() => store.getters.getMenuState)
 }
 
 .layout__main {
-  background: rgba(yellow, .4);
   width: 100%;
   max-width: calc(660px + 15px + 310px);
 }
