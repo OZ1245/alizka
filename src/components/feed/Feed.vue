@@ -17,3 +17,17 @@
 <script setup>
 import PostsList from '@/components/feed/PostsList'
 </script>
+
+<style lang="scss" scoped>
+.feed {
+  display: flex;
+  justify-content: space-between;
+}
+
+.feed__main-area {
+  width: 660px;
+}
+.feed__right-area {
+  width: 310px;
+}
+</style>

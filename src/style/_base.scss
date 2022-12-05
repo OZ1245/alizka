@@ -1,0 +1,28 @@
+* {
+  box-sizing: border-box;
+}
+
+figure {
+  margin: 0;
+}
+
+input,
+textarea {
+  &:focus-visible {
+    outline: none;
+  }
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+li {
+  padding: 0;
+}
+
+p {
+  margin: 0;
+}

@@ -70,7 +70,7 @@ const toggleMenu = () => store.dispatch('toggleMenu')
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: linear-gradient(79.78deg, var(--orange-dark) 9.12%, var(--orange-light) 92.5%);
+  background: linear-gradient(79.78deg, var(--orange) 9.12%, var(--orange-light) 92.5%);
 }
 
 .header__left-column {

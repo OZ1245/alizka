@@ -1,8 +1,8 @@
 <template>
   <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <rect width="15" height="15" fill="url(#pattern0)" fill-opacity="0.6"/>
+    <rect width="15" height="15" fill="url(#pattern1)" fill-opacity="0.6"/>
     <defs>
-      <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
+      <pattern id="pattern1" patternContentUnits="objectBoundingBox" width="1" height="1">
         <use xlink:href="#image0_26_1" transform="scale(0.0104167)"/>
       </pattern>
       <image 

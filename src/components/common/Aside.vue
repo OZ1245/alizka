@@ -269,7 +269,7 @@ const footerNavigationList = [
   transition: color .3s;
   
   &:hover {
-    color: var(--orange-dark);
+    color: var(--orange);
     transition: color .15s;
   }
 }
