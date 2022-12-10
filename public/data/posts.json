@@ -1,46 +1,49 @@
 {
   "data": [
     {
-      "id": "0",
+      "id": 0,
       "name": "Заголовок поста, текст проверка тест",
-      "categoryName": "movies",
-      "categoryUID": "Кино",
-      "authorId": "35",
+      "img": "/images/posts/1.png",
+      "categoryName": "Кино",
+      "categoryUID": "movies",
+      "authorId": 35,
       "authorName": "Mamie",
       "created": "2073-08-11 23:07:15",
-      "likesCount": "48",
-      "dislikesCount": "65",
-      "commentsCount": "29",
-      "repostsCount": "3",
-      "viewsCount": "781"
+      "likesCount": 48,
+      "dislikesCount": 65,
+      "commentsCount": 29,
+      "repostsCount": 3,
+      "viewsCount": 781
     },
     {
-      "id": "1",
+      "id": 1,
       "name": "Заголовок поста, текст проверка тест",
-      "categoryName": "games",
-      "categoryUID": "Игры",
-      "authorId": "57",
+      "img": "/images/posts/1.png",
+      "categoryName": "Игры",
+      "categoryUID": "games",
+      "authorId": 57,
       "authorName": "Ulrike",
       "created": "2083-10-02 19:37:24",
-      "likesCount": "44",
-      "dislikesCount": "44",
-      "commentsCount": "85",
-      "repostsCount": "76",
-      "viewsCount": "644"
+      "likesCount": 44,
+      "dislikesCount": 44,
+      "commentsCount": 85,
+      "repostsCount": 76,
+      "viewsCount": 644
     },
     {
-      "id": "2",
+      "id": 2,
       "name": "Заголовок поста, текст проверка тест",
-      "categoryName": "movies",
-      "categoryUID": "Кино",
-      "authorId": "84",
+      "img": "/images/posts/1.png",
+      "categoryName": "Кино",
+      "categoryUID": "movies",
+      "authorId": 84,
       "authorName": "Lorie",
       "created": "2042-12-03 10:36:46",
-      "likesCount": "87",
-      "dislikesCount": "77",
-      "commentsCount": "5",
-      "repostsCount": "13",
-      "viewsCount": "746"
+      "likesCount": 87,
+      "dislikesCount": 77,
+      "commentsCount": 5,
+      "repostsCount": 13,
+      "viewsCount": 746
     }
   ]
 }

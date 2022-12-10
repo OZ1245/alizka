@@ -4,23 +4,28 @@
       <div class="post-card__top">
         <div class="post-card__metadata">
           <img 
-            src="/images/categories/games.png" 
-            alt="Игры" 
+            :src="categoryImg" 
+            :alt="props.categoryName" 
             class="post-card__caterogy-icon"
           />
-          <p class="post-card__category-name">Категория</p>
-          <p class="post-card__user-name">Юзер</p>
-          <time class="post-card__date">1 час</time>
+          <p class="post-card__category-name">{{ props.categoryName }}</p>
+          <routerLink 
+            :to="{ name: 'User', props: props.authorId }"
+            class="post-card__user-name"
+          >
+            {{ props.authorName }}
+          </routerLink>
+          <time class="post-card__date">{{ props.created }}</time>
         </div>
         <TheButtonIcon 
           icon="Dots"
           class="post-card__dots-button"
         ></TheButtonIcon>
       </div>
-      <p class="post-cart__title">Название</p>
+      <p class="post-cart__title">{{ props.name }}</p>
     </div>
     <div class="post-card__body">
-      <img src="/images/posts/1.png" alt="Название">
+      <img :src="props.img" :alt="props.name">
     </div>
     <div class="post-card__footer">
       <div class="post-cart__metrics">
@@ -30,7 +35,7 @@
             size="22"
             class="post-cart__metric-icon"
           ></Icons>
-          0
+          {{ props.likesCount }}
         </span>
         <span class="post-cart__metric post-cart__metric--dislikes">
           <Icons 
@@ -38,7 +43,7 @@
             size="22"
             class="post-cart__metric-icon"
           ></Icons>
-          <!-- 0 -->
+          <!-- {{ props.dislikesCount }} -->
         </span>
         <span class="post-cart__metric post-cart__metric--comments">
           <Icons 
@@ -46,7 +51,7 @@
             size="25"
             class="post-cart__metric-icon"
           ></Icons>
-          0
+          {{ props.commentsCount }}
         </span>
         <span class="post-cart__metric post-cart__metric--reposts">
           <Icons 
@@ -54,7 +59,7 @@
             size="22"
             class="post-cart__metric-icon"
           ></Icons>
-          0
+          {{ props.repostsCount }}
         </span>
       </div>
       <span class="post-cart__metric post-cart__metric--views">
@@ -63,15 +68,33 @@
           size="15"
           class="post-cart__metric-icon"
         ></Icons>
-        0
+        {{ props.viewsCount }}
       </span>
     </div>
   </article>
 </template>
 
 <script setup>
+import { defineProps, computed }from 'vue'
 import TheButtonIcon from '@/components/ui/buttons/TheButtonIcon'
 import Icons from '@/components/ui/icons/Icons'
+
+const props = defineProps({
+  name: String,
+  img: String,
+  categoryName: String,
+  categoryUID: String,
+  authorId: Number,
+  authorName: String,
+  created: String,
+  likesCount: Number,
+  dislikesCount: Number,
+  commentsCount: Number,
+  repostsCount: Number,
+  viewsCount: Number
+})
+
+const categoryImg = computed(() => `/images/categories/${props.categoryUID}.png`)
 </script>
 
 <style lang="scss" scoped>
@@ -125,6 +148,7 @@ import Icons from '@/components/ui/icons/Icons'
   font-size: 15px;
   line-height: 18px;
   color: var(--gray);
+  text-decoration: none;
 
   margin-right: 20px;
 }

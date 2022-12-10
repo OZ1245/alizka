@@ -24,7 +24,7 @@ export default {
     async getPostsList({ commit }) {
       const response = await fetch('/data/posts.json')
       const json = await response.json()
-      commit('SET_POSTS_LIST', json)
+      commit('SET_POSTS_LIST', json.data)
     }
   },
 }

@@ -6,15 +6,17 @@ export function usePost() {
 
   onMounted(() => store.dispatch('post/getPostsList'))
 
-  const postsList = (filter) => computed(() => store.getters['post/getPostsList'](filter))
+  const getPostsList = (filter) => computed(() => store.getters['post/getPostsList'](filter))
+  const postsList = getPostsList()
   
-  const post = (id) => computed(() => store.getters['post/getPostById'](id))
+  const getPostById = (id) => computed(() => store.getters['post/getPostById'](id))
+  const post = getPostById()
   
   const addPost = (data) => store.dispatch('post/addPost')(data)
 
-  return (
+  return {
     postsList,
     post,
     addPost
-  )
+  }
 }

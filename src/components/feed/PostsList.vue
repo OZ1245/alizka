@@ -1,7 +1,11 @@
 <template>
   <div class="posts-list">
-    <div class="posts-list__item">
-      <PostCard></PostCard>
+    <div
+      v-for="(post, i) in postsList" 
+      :key="`post-${i}`"
+      class="posts-list__item"
+    >
+      <PostCard v-bind="post"></PostCard>
     </div>
   </div>
 </template>
@@ -11,6 +15,5 @@ import { usePost } from '@/libs/post.js'
 import PostCard from '@/components/feed/PostCard'
 
 const post = usePost()
-
-console.log(post.postsList)
+const postsList = post.postsList
 </script>
