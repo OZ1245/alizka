@@ -45,18 +45,40 @@
     <div class="post-card__footer">
       <div class="post-cart__metrics">
         <span class="post-cart__metric post-cart__metric--likes">
-          <Icons 
+          <Icons
+            v-if="!props.liked" 
             iconName="Like" 
             size="22"
             class="post-cart__metric-icon"
+
+            @click="onLikePost()"
+          ></Icons>
+          <Icons
+            v-else
+            iconName="LikeFill"
+            size="22"
+            class="post-cart__metric-icon post-cart__metric-icon--active"
+
+            @click="onLikePost()"
           ></Icons>
           {{ props.likesCount }}
         </span>
         <span class="post-cart__metric post-cart__metric--dislikes">
           <Icons 
+            v-if="!props.disliked"
             iconName="Like" 
             size="22"
             class="post-cart__metric-icon"
+            
+            @click="onDislikePost()"
+          ></Icons>
+          <Icons 
+            v-else
+            iconName="LikeFill" 
+            size="22"
+            class="post-cart__metric-icon post-cart__metric-icon--active"
+
+            @click="onDislikePost()"
           ></Icons>
           <!-- {{ props.dislikesCount }} -->
         </span>
@@ -90,13 +112,17 @@
 </template>
 
 <script setup>
-import { defineProps, computed } from 'vue'
 import moment from 'moment'
 import 'moment/locale/ru'
+import { defineProps, computed } from 'vue'
+import { usePost } from '@/libs/post.js'
 import TheButtonIcon from '@/components/ui/buttons/TheButtonIcon'
 import Icons from '@/components/ui/icons/Icons'
 
+const post = usePost();
+
 const props = defineProps({
+  id: Number,
   name: String,
   img: String,
   categoryName: String,
@@ -110,10 +136,19 @@ const props = defineProps({
   repostsCount: Number,
   viewsCount: Number,
   adultContent: Boolean,
+  liked: Boolean,
+  disliked: Boolean,
 })
 
 const categoryImg = computed(() => `/images/categories/${props.categoryUID}.png`)
 const created = computed(() => moment(props.created, 'x').fromNow(true))
+
+const onLikePost = () => {
+  post.likePost(props.id)
+}
+const onDislikePost = () => {
+  post.dislikePost(props.id)
+}
 </script>
 
 <style lang="scss" scoped>
@@ -272,6 +307,10 @@ const created = computed(() => moment(props.created, 'x').fromNow(true))
     color: var(--orange);
     transition: color .15s;
     cursor: pointer;
+  }
+
+  &--active {
+    color: var(--orange);
   }
 }
 </style>

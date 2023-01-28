@@ -12,11 +12,15 @@ export function usePost() {
   const getPostById = (id) => computed(() => store.getters['post/getPostById'](id))
   const post = getPostById()
   
-  const addPost = (data) => store.dispatch('post/addPost')(data)
+  const addPost = (data) => store.dispatch('post/addPost',data)
+  const likePost = (data) => store.dispatch('post/likePost', data)
+  const dislikePost = (data) => store.dispatch('post/dislikePost', data)
 
   return {
     postsList,
     post,
-    addPost
+    addPost,
+    likePost,
+    dislikePost
   }
 }
