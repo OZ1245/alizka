@@ -73,6 +73,7 @@ const showMenu = computed(() => store.getters.getMenuState)
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 99;
   transform: translateX(-100%);
   transition: transform 0.3s;
 
