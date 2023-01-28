@@ -8,12 +8,13 @@
       "categoryUID": "movies",
       "authorId": 35,
       "authorName": "Mamie",
-      "created": "2073-08-11 23:07:15",
+      "created": "1660234035000",
       "likesCount": 48,
       "dislikesCount": 65,
       "commentsCount": 29,
       "repostsCount": 3,
-      "viewsCount": 781
+      "viewsCount": 781,
+      "adultContent": false
     },
     {
       "id": 1,
@@ -23,12 +24,13 @@
       "categoryUID": "games",
       "authorId": 57,
       "authorName": "Ulrike",
-      "created": "2083-10-02 19:37:24",
+      "created": "1664714244000",
       "likesCount": 44,
       "dislikesCount": 44,
       "commentsCount": 85,
       "repostsCount": 76,
-      "viewsCount": 644
+      "viewsCount": 644,
+      "adultContent": true
     },
     {
       "id": 2,
@@ -38,12 +40,13 @@
       "categoryUID": "movies",
       "authorId": 84,
       "authorName": "Lorie",
-      "created": "2042-12-03 10:36:46",
+      "created": "1670038606000",
       "likesCount": 87,
       "dislikesCount": 77,
       "commentsCount": 5,
       "repostsCount": 13,
-      "viewsCount": 746
+      "viewsCount": 746,
+      "adultContent": false
     }
   ]
 }

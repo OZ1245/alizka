@@ -8,24 +8,39 @@
             :alt="props.categoryName" 
             class="post-card__caterogy-icon"
           />
-          <p class="post-card__category-name">{{ props.categoryName }}</p>
+          <p class="post-card__category-name">
+            {{ props.categoryName }}
+          </p>
           <routerLink 
             :to="{ name: 'User', props: props.authorId }"
             class="post-card__user-name"
           >
             {{ props.authorName }}
           </routerLink>
-          <time class="post-card__date">{{ props.created }}</time>
+          <time class="post-card__date">
+            {{ created }}
+          </time>
         </div>
         <TheButtonIcon 
           icon="Dots"
           class="post-card__dots-button"
         ></TheButtonIcon>
       </div>
-      <p class="post-cart__title">{{ props.name }}</p>
+      <p class="post-cart__title">
+        {{ props.name }}
+        <span 
+          v-if="props.adultContent"
+          class="post-cart__adult-badge"
+        >NSFW 18+</span>
+      </p>
     </div>
     <div class="post-card__body">
-      <img :src="props.img" :alt="props.name">
+      <figcaption 
+        class="post-card__image"
+        :class="{ 'post-card__image--blur': props.adultContent }"
+      >
+        <img :src="props.img" :alt="props.name">
+      </figcaption>
     </div>
     <div class="post-card__footer">
       <div class="post-cart__metrics">
@@ -75,7 +90,9 @@
 </template>
 
 <script setup>
-import { defineProps, computed }from 'vue'
+import { defineProps, computed } from 'vue'
+import moment from 'moment'
+import 'moment/locale/ru'
 import TheButtonIcon from '@/components/ui/buttons/TheButtonIcon'
 import Icons from '@/components/ui/icons/Icons'
 
@@ -91,10 +108,12 @@ const props = defineProps({
   dislikesCount: Number,
   commentsCount: Number,
   repostsCount: Number,
-  viewsCount: Number
+  viewsCount: Number,
+  adultContent: Boolean,
 })
 
 const categoryImg = computed(() => `/images/categories/${props.categoryUID}.png`)
+const created = computed(() => moment(props.created, 'x').fromNow(true))
 </script>
 
 <style lang="scss" scoped>
@@ -115,7 +134,7 @@ const categoryImg = computed(() => `/images/categories/${props.categoryUID}.png`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 13px;
+  margin-bottom: 12px;
 }
 
 .post-card__metadata {
@@ -170,16 +189,45 @@ const categoryImg = computed(() => `/images/categories/${props.categoryUID}.png`
   font-size: 20px;
   line-height: 23px;
   color: var(--black);
+
+  display: inline-flex;
+  align-items: center;
+}
+
+.post-cart__adult-badge {
+  font-family: 'Inter';
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 15px;
+  color: var(--red);
+
+  padding: 5px 7px;
+  margin-left: 18px;
+  background: var(--white);
+  border: 1px solid var(--red);
+  border-radius: 40px;
 }
 
 .post-card__body {
   width: 100%;
   height: 370px;
+}
+
+.post-card__image {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+
+  &--blur {
+    img {
+      filter: blur(15px);
+    }
   }
 }
 
