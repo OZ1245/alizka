@@ -5,7 +5,8 @@
       :key="`post-${i}`"
       class="posts-list__item"
     >
-      <PostCard v-bind="post"></PostCard>
+      <!-- <PostCard v-bind="post"></PostCard> -->
+      <PostCard :id="post.id"></PostCard>
     </div>
   </div>
 </template>
@@ -14,6 +15,5 @@
 import { usePost } from '@/libs/post.js'
 import PostCard from '@/components/feed/PostCard'
 
-const post = usePost()
-const postsList = post.postsList
+const { postsList } = usePost()
 </script>

@@ -1,21 +1,25 @@
 export default {
-  state: {
-    postsList: []
-  },
+  state: () => ({
+    postsList: [],
+    commentsList: []
+  }),
+  
   getters: {
-    getPostsList: ({ postsList }) => (filter = null) => {
-      if (filter) {
-        // TODO
-        return postsList || []
-      }
-    
-      return postsList || []
-    },
+    getPostsList: ({ postsList }) => (
+      postsList || []
+    ),
 
     getPostById: ({ postsList }) => (id) => (
       postsList.find(post => post.id === id) || null
-    )  
+    ),
+    
+    getCommentsByPostId: ({ commentsList }) => (postId) => {
+      console.log('--- getCommentsByPostId getter ---')
+      console.log('commentsList:', commentsList)
+      return commentsList.filter(comment => comment.postId == postId) || []
+    }
   },
+
   mutations: {
     SET_POSTS_LIST(state, data) {
       state.postsList = data
@@ -53,12 +57,18 @@ export default {
           }
         }
       })
-    }
+    },
+
+    SET_COMMENTS_LIST(state, data) {
+      state.commentsList = data
+    },
   },
+
   actions: {
     async getPostsList({ commit }) {
       const response = await fetch('/data/posts.json')
       const json = await response.json()
+
       commit('SET_POSTS_LIST', json.data)
     },
 
@@ -68,6 +78,13 @@ export default {
 
     dislikePost({ commit }, postId) {
       commit('DISLIKE_POST', postId)
-    }
+    },
+
+    async getCommentsList({ commit }) {
+      const response = await fetch('/data/comments.json')
+      const json = await response.json()
+
+      commit('SET_COMMENTS_LIST', json.data)
+    },
   },
 }

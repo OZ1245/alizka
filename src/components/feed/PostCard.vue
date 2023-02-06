@@ -5,17 +5,17 @@
         <div class="post-card__metadata">
           <img 
             :src="categoryImg" 
-            :alt="props.categoryName" 
+            :alt="post.categoryName" 
             class="post-card__caterogy-icon"
           />
           <p class="post-card__category-name">
-            {{ props.categoryName }}
+            {{ post.categoryName }}
           </p>
           <routerLink 
-            :to="{ name: 'User', props: props.authorId }"
+            :to="{ name: 'User', props: post.authorId }"
             class="post-card__user-name"
           >
-            {{ props.authorName }}
+            {{ post.authorName }}
           </routerLink>
           <time class="post-card__date">
             {{ created }}
@@ -26,88 +26,90 @@
           class="post-card__dots-button"
         ></TheButtonIcon>
       </div>
-      <p class="post-cart__title">
-        {{ props.name }}
+      <h2 class="post-card__title">
+        {{ post.name }}
         <span 
-          v-if="props.adultContent"
-          class="post-cart__adult-badge"
+          v-if="post.adultContent"
+          class="post-card__adult-badge"
         >NSFW 18+</span>
-      </p>
+      </h2>
     </div>
     <div class="post-card__body">
       <figcaption 
         class="post-card__image"
-        :class="{ 'post-card__image--blur': props.adultContent }"
+        :class="{ 'post-card__image--blur': post.adultContent }"
       >
-        <img :src="props.img" :alt="props.name">
+        <img :src="post.img" :alt="post.name">
       </figcaption>
     </div>
     <div class="post-card__footer">
-      <div class="post-cart__metrics">
-        <span class="post-cart__metric post-cart__metric--likes">
+      <div class="post-card__metrics">
+        <span class="post-card__metric post-card__metric--likes">
           <Icons
-            v-if="!props.liked" 
+            v-if="!post.liked" 
             iconName="Like" 
             size="22"
-            class="post-cart__metric-icon"
+            class="post-card__metric-icon"
 
-            @click="onLikePost()"
+            @click="likePost(post.id)"
           ></Icons>
           <Icons
             v-else
             iconName="LikeFill"
             size="22"
-            class="post-cart__metric-icon post-cart__metric-icon--active"
+            class="post-card__metric-icon post-card__metric-icon--active"
 
-            @click="onLikePost()"
+            @click="likePost(post.id)"
           ></Icons>
-          {{ props.likesCount }}
+          {{ post.likesCount }}
         </span>
-        <span class="post-cart__metric post-cart__metric--dislikes">
+        <span class="post-card__metric post-card__metric--dislikes">
           <Icons 
-            v-if="!props.disliked"
+            v-if="!post.disliked"
             iconName="Like" 
             size="22"
-            class="post-cart__metric-icon"
+            class="post-card__metric-icon"
             
-            @click="onDislikePost()"
+            @click="dislikePost(post.id)"
           ></Icons>
           <Icons 
             v-else
             iconName="LikeFill" 
             size="22"
-            class="post-cart__metric-icon post-cart__metric-icon--active"
+            class="post-card__metric-icon post-card__metric-icon--active"
 
-            @click="onDislikePost()"
+            @click="dislikePost(post.id)"
           ></Icons>
-          <!-- {{ props.dislikesCount }} -->
+          <!-- {{ post.dislikesCount }} -->
         </span>
-        <span class="post-cart__metric post-cart__metric--comments">
+        <span class="post-card__metric post-card__metric--comments">
           <Icons 
             iconName="Comments" 
             size="25"
-            class="post-cart__metric-icon"
+            class="post-card__metric-icon"
           ></Icons>
-          {{ props.commentsCount }}
+          {{ post.commentsCount }}
         </span>
-        <span class="post-cart__metric post-cart__metric--reposts">
+        <span class="post-card__metric post-card__metric--reposts">
           <Icons 
             iconName="Share" 
             size="22"
-            class="post-cart__metric-icon"
+            class="post-card__metric-icon"
           ></Icons>
-          {{ props.repostsCount }}
+          {{ post.repostsCount }}
         </span>
       </div>
-      <span class="post-cart__metric post-cart__metric--views">
+      <span class="post-card__metric post-card__metric--views">
         <Icons 
           iconName="Eye" 
           size="15"
-          class="post-cart__metric-icon"
+          class="post-card__metric-icon"
         ></Icons>
-        {{ props.viewsCount }}
+        {{ post.viewsCount }}
       </span>
     </div>
+
+    <PostComments :comments="post.comments"></PostComments>
   </article>
 </template>
 
@@ -118,37 +120,19 @@ import { defineProps, computed } from 'vue'
 import { usePost } from '@/libs/post.js'
 import TheButtonIcon from '@/components/ui/buttons/TheButtonIcon'
 import Icons from '@/components/ui/icons/Icons'
-
-const post = usePost();
+import PostComments from '@/components/feed/PostComments'
 
 const props = defineProps({
   id: Number,
-  name: String,
-  img: String,
-  categoryName: String,
-  categoryUID: String,
-  authorId: Number,
-  authorName: String,
-  created: String,
-  likesCount: Number,
-  dislikesCount: Number,
-  commentsCount: Number,
-  repostsCount: Number,
-  viewsCount: Number,
-  adultContent: Boolean,
-  liked: Boolean,
-  disliked: Boolean,
 })
+const { getPostById, likePost, dislikePost } = usePost();
+const post = getPostById(props.id)
 
-const categoryImg = computed(() => `/images/categories/${props.categoryUID}.png`)
-const created = computed(() => moment(props.created, 'x').fromNow(true))
+const categoryImg = computed(() => `/images/categories/${post.categoryUID}.png`)
+const created = computed(() => moment(post.created, 'x').fromNow(true))
 
-const onLikePost = () => {
-  post.likePost(props.id)
-}
-const onDislikePost = () => {
-  post.dislikePost(props.id)
-}
+console.log('--- Post Card component ---');
+console.log('post:', post);
 </script>
 
 <style lang="scss" scoped>
@@ -218,7 +202,7 @@ const onDislikePost = () => {
   color: var(--gray);
 }
 
-.post-cart__title {
+.post-card__title {
   font-family: 'Roboto';
   font-weight: 500;
   font-size: 20px;
@@ -229,7 +213,7 @@ const onDislikePost = () => {
   align-items: center;
 }
 
-.post-cart__adult-badge {
+.post-card__adult-badge {
   font-family: 'Inter';
   font-weight: 700;
   font-size: 12px;
@@ -280,12 +264,12 @@ const onDislikePost = () => {
   color: rgba(var(--black), .7);
 }
 
-.post-cart__metrics {
+.post-card__metrics {
   display: flex;
   align-items: center;
 }
 
-.post-cart__metric {
+.post-card__metric {
   display: inline-flex;
   align-items: center;
 
@@ -298,7 +282,7 @@ const onDislikePost = () => {
   }
 }
 
-.post-cart__metric-icon {
+.post-card__metric-icon {
   margin-right: 8px;
   color: var(--gray);
   transition: color .3s;
