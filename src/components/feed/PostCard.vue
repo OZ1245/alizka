@@ -130,9 +130,6 @@ const post = getPostById(props.id)
 
 const categoryImg = computed(() => `/images/categories/${post.categoryUID}.png`)
 const created = computed(() => moment(post.created, 'x').fromNow(true))
-
-console.log('--- Post Card component ---');
-console.log('post:', post);
 </script>
 
 <style lang="scss" scoped>

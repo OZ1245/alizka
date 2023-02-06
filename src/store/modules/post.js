@@ -13,11 +13,9 @@ export default {
       postsList.find(post => post.id === id) || null
     ),
     
-    getCommentsByPostId: ({ commentsList }) => (postId) => {
-      console.log('--- getCommentsByPostId getter ---')
-      console.log('commentsList:', commentsList)
-      return commentsList.filter(comment => comment.postId == postId) || []
-    }
+    getCommentsByPostId: ({ commentsList }) => (postId) => (
+      commentsList.filter(comment => comment.postId == postId) || []
+    )
   },
 
   mutations: {

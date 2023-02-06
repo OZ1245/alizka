@@ -3,7 +3,6 @@
     {
       "id": "0",
       "authorId": "0",
-      "authorName": "Sidoney",
       "comment": "Вау!",
       "created": "1674889909000",
       "postId": "1"
@@ -11,7 +10,6 @@
     {
       "id": "1",
       "authorId": "1",
-      "authorName": "Roxane",
       "comment": "Супер!",
       "created": "1674889909000",
       "postId": "1"
@@ -19,7 +17,6 @@
     {
       "id": "2",
       "authorId": "2",
-      "authorName": "Desirae",
       "comment": "Красота!",
       "created": "1674889909000",
       "postId": "1"
@@ -27,7 +24,6 @@
     {
       "id": "3",
       "authorId": "2",
-      "authorName": "Desirae",
       "comment": "Афигенно!",
       "created": "1674889909000",
       "postId": "1"

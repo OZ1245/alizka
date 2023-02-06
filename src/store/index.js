@@ -1,5 +1,6 @@
 import { createStore } from 'vuex'
 import postModule from './modules/post.js'
+import userModule from './modules/user.js'
 
 export default createStore({
   state: () => ({
@@ -26,6 +27,10 @@ export default createStore({
     post: {
       namespaced: true,
       ...postModule
+    },
+    user: {
+      namespaced: true,
+      ...userModule
     },
   }
 })

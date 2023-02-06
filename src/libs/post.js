@@ -1,10 +1,13 @@
 import { computed, onMounted } from 'vue'
 import { useStore } from 'vuex'
+import { useUser } from '@/libs/user.js'
 
 export function usePost() {
   const store = useStore()
+  const { fetchUsersList, getUserById } = useUser()
 
   onMounted(() => {
+    fetchUsersList()
     store.dispatch('post/getCommentsList')
     store.dispatch('post/getPostsList')
   })
@@ -13,8 +16,19 @@ export function usePost() {
   
   const getPostById = (id) => computed(() => {
     const post = computed(() => store.getters['post/getPostById'](id)).value
-    post['comments'] = computed(() => store.getters['post/getCommentsByPostId'](id)).value
-    return post
+    const comments = computed(() => {
+      return store.getters['post/getCommentsByPostId'](id).map(comment => {
+        return {
+          ...comment,
+          authorName: getUserById(comment.authorId).name
+        }
+      })
+    }).value
+
+    return {
+      ...post,
+      comments: comments
+    }
   }).value
   
   const addPost = (data) => store.dispatch('post/addPost',data)
